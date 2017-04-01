@@ -19,36 +19,32 @@ public class Solution {
 	
 	 public int eraseOverlapIntervals(Interval[] intervals) {
 		 
-		 if(null==intervals||intervals.length==0) return 0;
-	    	//1.sort intervals  from min_->max   
+	        if(null==intervals||intervals.length==0) return 0;
+
 	    	Arrays.sort(intervals,new Comparator<Interval>(){
 				@Override
 				public int compare(Interval o1, Interval o2) {
 					
-				   return o1.start>o2.start?o2.end-o1.end:o2.start-o1.start;
+				    return o1.start>o2.start?1:-1;
 				}
 			
 	    	});
-	   // 	for(Interval i:intervals)
-	   // 	         System.out.println(""+i.start+":"+i.end+"-------");
-	    	//add list if meet cross num++;
-	    	List<Interval> list=new ArrayList<Interval>();
+
 	    	int inter=0;
-	    	list.add(intervals[0]);
+	    	int end=intervals[0].end;
 	    	for(int i=1;i<intervals.length;i++){
-	    		if(intervals[i].start==intervals[i-1].start){
-	    			inter++;
+	    		if(intervals[i].start>=end){
+	    			end=intervals[i].end;
 	    			continue;
+
+	    		}else{
+	    		    inter++;
+	    		    end=Math.min(end,intervals[i].end);
 	    		}
-	    		if(intervals[i].start>intervals[i-1].start&&intervals[i-1].start<intervals[i-1].end){
-	    			inter++;
-	    			continue;
-	    		}
-	    		list.add(intervals[i]);
+	    		
 	    	}
 	    	return inter;
 	    }
-	    
    // Definition for an interval.
     public class Interval {
          int start;
