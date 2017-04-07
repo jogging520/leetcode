@@ -57,7 +57,11 @@ public class Solution {
 	}
 
 	//n|1  if n is odd return n ;if n is even return n+1
-    private int newIndex(int index, int n) {
+    private static int newIndex(int index, int n) {
         return (1 + 2*index) % (n | 1);
     }
+    
+    public static void main(String[] args) {
+		System.out.println( newIndex(1, 6 ) );
+	}
 }
