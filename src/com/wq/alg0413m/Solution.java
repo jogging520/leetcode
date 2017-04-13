@@ -23,17 +23,16 @@ import java.util.Queue;
 	7 
  */
 public class Solution {
-    public int findBottomLeftValue(TreeNode root) {
-        //思路 遍历每一层，如果有左节点 加入结果集  同一层的结果集 只要第一个
-    	if(root.left==null) return root.val;
+	public int findBottomLeftValue(TreeNode root) {
+        //思路 遍历每一层，第一个节点加入结果集
     	Queue<TreeNode> queue =new LinkedList<TreeNode>();
     	int res=0;
     	queue.offer(root);
     	while(!queue.isEmpty()){
-    		 int N=queue.size();
+    	     int N=queue.size();
     		 res=queue.peek().val;
     		 for(int i=0;i<N;i++){
-    			 TreeNode node=queue.poll();
+	    	     TreeNode node=queue.poll();
 	    	     if(node.left!=null) queue.offer(node.left);
 	    	     if(node.right!=null)queue.offer(node.right);
 	    	 }
