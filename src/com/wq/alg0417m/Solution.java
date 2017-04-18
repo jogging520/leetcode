@@ -1,7 +1,5 @@
 package com.wq.alg0417m;
 
-import com.wq.alg0415m.Solution2.TreeNode;
-
 /**
  * @author Administrator
  * @98
@@ -19,36 +17,16 @@ import com.wq.alg0415m.Solution2.TreeNode;
  */
 public class Solution {
     public boolean isValidBST(TreeNode root) {
-    	if(root==null) return true;
-    	if(root.left!=null&&root.right!=null) {
-    	    if(root.left.val<root.val&&root.right.val>root.val){
-    	    	return isValidBST(root.left)&&isValidBST(root.right);
-    	    }
-    	    return false;
-    	}
-    		    
-        
-    	if(root.left!=null||root.right==null){
-    		if(root.left.val<root.val){
-    	    	return isValidBST(root.left);
-    	    }
-    	    return false;
-
-    	}
-    	if(root.left==null||root.right!=null){
-    		if(root.right.val>root.val){
-    	    	return isValidBST(root.right);
-    	    }
-    	    return false;
-
-    	}
-    	if(root.left==null||root.right!=null){
-    		return true;
-    	}
-	    return false;
+    	return helper(root,Long.MIN_VALUE,Long.MAX_VALUE);
     }
-    public class TreeNode {
-        int val;
+    private boolean helper(TreeNode node, long minValue, long maxValue) {
+    	if(node==null) return true;
+    	if(node.val<=minValue||node.val>=maxValue)  return false;
+    	
+		return helper(node.left,minValue,node.val)&&helper(node.right,node.val,maxValue);
+	}
+	public class TreeNode {
+          int      val;
 	      TreeNode left;
 	      TreeNode right;
 	      TreeNode(int x) { val = x; }
