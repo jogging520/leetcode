@@ -9,7 +9,7 @@ import java.util.Map;
  * @author Administrator
  *@106  
  *Given inorder and postorder traversal of a tree, construct the binary tree.
- *先做右子树？？？
+ *先做右子树？？？ 
  * 2017年4月18日 下午4:27:11   
  */
 public class Solution {
