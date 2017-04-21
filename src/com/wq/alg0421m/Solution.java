@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 
 /**
  * @author Administrator
@@ -37,16 +38,25 @@ public class Solution {
    	 }
    	 
    	 //go around the map take the list 
-   	 String start="JFK";
-   	 System.out.println("map:"+map);
-
-   	 System.out.println(map.get(start).size()!=0);
-   	 while(map!=null&&map.get(start).size()!=0){
-   		 String toPlace=sortlist(map,start);
-   		 resList.add(start);
-   		 start=toPlace; 
+//   	 String start="JFK";
+//   	 System.out.println("map:"+map);
+//
+//   	 System.out.println(map.get(start).size()!=0);
+   	 //需要思考 如果找不到，走回头路的话，怎么办
+     Stack<String> stack=new Stack<String>();
+     stack.add("JFK");
+   	 while(!stack.isEmpty()){
+   		 String start=stack.peek();
+   		 if(map.containsKey(start)&&!map.get(start).isEmpty()){
+	   		 String toPlace=sortlist(map,start);
+	   		 stack.push(toPlace);
+	   		 start=toPlace; 
+   		 }
+   		 else{
+   			 resList.add(0,stack.pop());
+   		 }
    	 }
-   	  resList.add(start);
+   	 // resList.add(start);
    	  return resList;
    	 
    }
@@ -66,7 +76,7 @@ public class Solution {
 		list=map.get(start);
        String res=list.remove(0);
        map.replace(start,list);
-		return res;
+	   return res;
 	}
 	
 	public static void main(String[] args) {

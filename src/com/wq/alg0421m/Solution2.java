@@ -36,7 +36,7 @@ import java.util.Stack;
    		 
    	 }
    	 
-   	//DFS
+   	//DFS  通过stack 保存访问过的节点
    	 Stack<String> stack=new Stack<String>();
    	 stack.push("JFK");
    	 while(!stack.isEmpty()){
